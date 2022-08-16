@@ -33,23 +33,6 @@ function operate(operator, num1, num2) {
     }      
 }
 
-let equationDisplay = document.querySelector('.equationDisplay')
-let resultDisplay = document.querySelector('.resultDisplay')
-
-let valueBtns = document.querySelectorAll('.valueBtn')
-let operationBtns = document.querySelectorAll('.operationBtn')
-
-valueBtns.forEach(valueBtn => {
-    valueBtn.addEventListener('click', addToDisplay)
-});
-
-operationBtns.forEach(operationBtn => {
-    operationBtn.addEventListener('click', addOperation)
-})
-
-equalsBtn = document.querySelector('#equalsBtn')
-equalsBtn.addEventListener('click', calculate)
-
 function addToDisplay(e) {
     let resultDisplayValue = resultDisplay.textContent
     let currentBtnValue = e.target.textContent
@@ -68,7 +51,7 @@ function addToDisplay(e) {
 function addOperation(e) {
     let resultDisplayValue = resultDisplay.textContent
     let operationBtnValue = e.target.textContent
-
+    
     if (resultDisplayValue.includes('+-x/')) return
 
     equationDisplay.textContent = `${resultDisplayValue} ${operationBtnValue}`
@@ -93,3 +76,63 @@ function calculate() {
 
     resultDisplay.textContent = operate(operation, num1, num2)
 }
+
+function clear() {
+    equationDisplay.textContent = ''
+    resultDisplay.textContent = '0'
+}
+
+function deleteLastChar() {
+    let resultDisplayValue = resultDisplay.textContent
+    let equationDisplayValue = equationDisplay.textContent
+
+    let lastCharOfEquation = equationDisplayValue.slice(-1)
+    
+    if (equationDisplayValue) {
+        if (lastCharOfEquation === '=') {
+            let positionOfOperator = equationDisplayValue.search(/[+|-|x|/]/)
+
+            let charsUntilOperator = equationDisplayValue.slice(0, (positionOfOperator + 1))
+            equationDisplay.textContent = charsUntilOperator
+
+            let charsAfterOperator = equationDisplayValue.slice((positionOfOperator + 2), -2)
+            resultDisplay.textContent = charsAfterOperator
+        }
+
+        else {
+            resultDisplay.textContent = resultDisplayValue.slice(0, -1)
+
+            if (resultDisplay.textContent === '') {
+                resultDisplay.textContent = equationDisplayValue.slice(0, -2)
+                equationDisplay.textContent = ''
+            }
+        }
+    }
+
+    else {
+        resultDisplay.textContent = resultDisplayValue.slice(0, -1)
+    }
+}
+
+let equationDisplay = document.querySelector('.equationDisplay')
+let resultDisplay = document.querySelector('.resultDisplay')
+
+let valueBtns = document.querySelectorAll('.valueBtn')
+let operationBtns = document.querySelectorAll('.operationBtn')
+
+valueBtns.forEach(valueBtn => {
+    valueBtn.addEventListener('click', addToDisplay)
+});
+
+operationBtns.forEach(operationBtn => {
+    operationBtn.addEventListener('click', addOperation)
+})
+
+let equalsBtn = document.querySelector('#equalsBtn')
+equalsBtn.addEventListener('click', calculate)
+
+let clearBtn = document.querySelector('#clearBtn')
+clearBtn.addEventListener('click', clear)
+
+let deleteBtn = document.querySelector('#deleteBtn')
+deleteBtn.addEventListener('click', deleteLastChar)  
