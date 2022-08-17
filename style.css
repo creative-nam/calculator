@@ -19,16 +19,18 @@ body {
 }
 
 header {
-    font-size: 20px;
+    font-size: 22px;
     display: flex;
     flex-direction: column;
     height: 4em;
     text-align: right; 
     background-color: #598392;
+    flex-wrap: wrap;
 }
 
-.equationDisplay {    
+#equationDisplay {    
     font-size: .6em;
+    flex: 1;
 }
 
 section {
@@ -36,7 +38,6 @@ section {
     display: flex;
     flex-direction: column;
     gap: .3em;
-    flex: 1;
     padding: .2em;
     text-align: center;
 }
@@ -46,11 +47,49 @@ section {
     justify-content: space-evenly;
     align-items: center;
     gap: .4em;
+    flex: 1;
+}
+
+#clearBtn {
+    background-color: #ec6a53;
+}
+
+#clearBtn:hover {
+    background-color: #ec3232;
+}
+
+#deleteBtn {
+    background-color: #aaa;
+}
+
+#deleteBtn:hover {
+    background-color: #bdd;
 }
 
 .btn {
-    background-color: #EEC643;
+    background-color: #f1b81ce0;
     border: 1px solid black;
     font-size: 1em;
     color: #1F2D33;
+    flex: 1;
+}
+
+.btn:hover {
+    background-color: #af8c19e3;
+}
+
+.operationBtn {    
+    background-color: #88d;
+}
+
+.operationBtn:hover {
+    background-color: #aaf;
+}
+
+#equalsBtn {  
+    background-color: #263;
+}
+
+#equalsBtn:hover {  
+    background-color: #293;
 }

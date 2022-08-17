@@ -70,7 +70,7 @@ function calculate() {
     let num1 = Number(equationDisplayValue.slice(0, -2))
     let num2 = Number(resultDisplayValue)
 
-    if (!(num1 && num2)) return resultDisplayValue
+    if (num1 === null || num2 === null) return resultDisplayValue
 
     equationDisplay.textContent += ` ${resultDisplayValue} =`
 
@@ -110,12 +110,20 @@ function deleteLastChar() {
     }
 
     else {
-        resultDisplay.textContent = resultDisplayValue.slice(0, -1)
+        if (resultDisplayValue === 0) return
+
+        if (resultDisplayValue.length === 1) {
+            resultDisplay.textContent = '0'
+        }
+
+        else {
+            resultDisplay.textContent = resultDisplayValue.slice(0, -1)
+        }
     }
 }
 
-let equationDisplay = document.querySelector('.equationDisplay')
-let resultDisplay = document.querySelector('.resultDisplay')
+let equationDisplay = document.querySelector('#equationDisplay')
+let resultDisplay = document.querySelector('#resultDisplay')
 
 let valueBtns = document.querySelectorAll('.valueBtn')
 let operationBtns = document.querySelectorAll('.operationBtn')
